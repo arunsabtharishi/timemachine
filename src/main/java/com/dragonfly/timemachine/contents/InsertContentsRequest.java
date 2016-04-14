@@ -3,16 +3,16 @@ package com.dragonfly.timemachine.contents;
 import java.sql.Date;
 
 public class InsertContentsRequest {
-	String userContents;
+	String contents;
 	
 	Date contentDate;
 	
-	public String getUserContents() {
-		return userContents;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setUserContents(String userContents) {
-		this.userContents = userContents;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	public Date getContentDate() {
