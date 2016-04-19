@@ -5,7 +5,7 @@ import java.sql.Date;
 public class InsertContentsRequest {
 	String contents;
 	
-	Date contentDate;
+	String contentDate;
 	
 	public String getContents() {
 		return contents;
@@ -15,11 +15,11 @@ public class InsertContentsRequest {
 		this.contents = contents;
 	}
 
-	public Date getContentDate() {
+	public String getContentDate() {
 		return contentDate;
 	}
 
-	public void setContentDate(Date contentDate) {
+	public void setContentDate(String contentDate) {
 		this.contentDate = contentDate;
 	}
 }
