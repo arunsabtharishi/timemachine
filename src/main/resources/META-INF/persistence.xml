@@ -4,5 +4,7 @@
 		<class>com.dragonfly.timemachine.domain.Model</class>
 		<class>com.dragonfly.timemachine.domain.Contents</class>
 		<class>com.dragonfly.timemachine.domain.Credentials</class>
+		<class>com.dragonfly.timemachine.domain.AuditableModel</class>
+		<class>com.dragonfly.timemachine.domain.NamedModel</class>
 	</persistence-unit>
 </persistence>
