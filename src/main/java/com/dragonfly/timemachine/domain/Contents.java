@@ -5,41 +5,23 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.domain.Auditable;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "CONTENTS")
 public class Contents extends Model {
-	@Column(name = "USER_NAME")
-	String userName;
-	
-	@Column(name = "CONTENT")
-	String content;
-	
-	@Column(name = "CONTENT_DATE")
-	Date contentDate;
-	
-	public String getUserName() {
-		return userName;
-	}
+    @Column(name = "USER_NAME")
+    String userName;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    @Column(name = "CONTENT")
+    String content;
 
-	public String getContent() {
-		return content;
-	}
+    @Column(name = "CONTENT_DATE")
+    Date contentDate;
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getContentDate() {
-		return contentDate;
-	}
-
-	public void setContentDate(Date contentDate) {
-		this.contentDate = contentDate;
-	}
 }
