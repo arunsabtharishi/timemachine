@@ -13,7 +13,7 @@ import org.hibernate.annotations.Parameter;
  * Created by Arun on 9/4/2015.
  */
 @MappedSuperclass
-public abstract class Model {
+public abstract class Model extends AbstractAuditableEntity{
     public static final int ID_LENGTH = 36;
     public static final int ENUM_LENGTH = 256;
 
@@ -22,13 +22,13 @@ public abstract class Model {
     @Size(max = ID_LENGTH)
     @GeneratedValue(generator = "UuidOrAssignedGenerator")
     @GenericGenerator(name = "UuidOrAssignedGenerator", strategy = "com.dragonfly.timemachine.util.jpa.UuidOrAssignedGenerator", parameters = { @Parameter(name = "strategy", value = "uuid2") })
-    private String id;
+    private Integer id;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

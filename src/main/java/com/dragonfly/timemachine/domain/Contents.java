@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Entity
 @Table(name = "CONTENTS")

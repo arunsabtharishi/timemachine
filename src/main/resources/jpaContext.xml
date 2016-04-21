@@ -13,6 +13,10 @@
 	
 	<jpa:repositories base-package="com.dragonfly.timemachine.repository" />
 	
+	 <jpa:auditing auditor-aware-ref="auditorAware" />
+
+    <bean id="auditorAware" class="com.dragonfly.timemachine.domain.AuditorAwareImpl" />
+	
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
