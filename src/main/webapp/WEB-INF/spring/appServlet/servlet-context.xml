@@ -19,10 +19,8 @@
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <resources mapping="/resources/**" location="/resources/" />
 
-    <jpa:auditing auditor-aware-ref="auditorAware" />
 
-    <bean id="auditorAware" class="com.dragonfly.timemachine.domain.AuditorAwareImpl"/>
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    
 
     <mvc:annotation-driven />
 

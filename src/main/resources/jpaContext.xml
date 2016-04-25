@@ -10,7 +10,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <context:annotation-config />
-
+    
+    <bean id="auditorAware" class="com.dragonfly.timemachine.domain.AuditorAwareImpl"/>
+ 
     <jpa:repositories base-package="com.dragonfly.timemachine.repository" />
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />

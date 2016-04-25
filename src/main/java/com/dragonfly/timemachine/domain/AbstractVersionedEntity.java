@@ -1,31 +1,38 @@
 package com.dragonfly.timemachine.domain;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 @MappedSuperclass
 @SuppressWarnings("serial")
 public abstract class AbstractVersionedEntity extends AbstractAuditableEntity {
 
-    @Version
-    protected int lockVersion;
+    
+    private static final long serialVersionUID = 1L;
+    public static final int ID_LENGTH = 36;
+    public static final int ENUM_LENGTH = 256;
 
-    /**
-     * Gets lock version, used for optimistic locking.
-     */
-    public int getLockVersion() {
-        return lockVersion;
-    }
-
-    /**
-     * <p>Sets lock version, used for optimistic locking.</p>
-     * 
-     * <p><strong>Note</strong>: Shouldn't be set except by JPA, 
-     * setter needed for matching getter/setter for conversion 
-     * between entities and JAXB beans.
-     */
-    public void setLockVersion(int lockVersion) {
-        this.lockVersion = lockVersion;
-    }
+    @Autowired(required = true)
+	@Id
+    @Column(name = "ID", updatable = false)
+    @Size(max = ID_LENGTH)
+    @GeneratedValue(generator = "UuidOrAssignedGenerator")
+    @GenericGenerator(name = "UuidOrAssignedGenerator", strategy = "com.dragonfly.timemachine.util.jpa.UuidOrAssignedGenerator", parameters = { @Parameter(name = "strategy", value = "uuid2") })
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+    private String id;
+    
     
 }
