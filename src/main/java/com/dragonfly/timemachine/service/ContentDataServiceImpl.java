@@ -21,12 +21,8 @@ public class ContentDataServiceImpl implements ContentsDataService {
 	public void insertContents(InsertContentsRequest insertContentsRequest) {
 		Contents contents = new Contents();
 		
-		String contentsFromRequest = insertContentsRequest.getContents();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//		Date contentDate = null ;
-		
+		String contentsFromRequest = insertContentsRequest.getContents();	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-       // java.util.Date date = sdf.parse(strDate);
        
         java.sql.Date contentDate = null;
 		

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 @SuppressWarnings("serial")
-public abstract class AbstractVersionedEntity extends AbstractAuditableEntity {
+public abstract class Model extends AuditableModel {
 
     
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,6 @@ public abstract class AbstractVersionedEntity extends AbstractAuditableEntity {
     @Size(max = ID_LENGTH)
     @GeneratedValue(generator = "UuidOrAssignedGenerator")
     @GenericGenerator(name = "UuidOrAssignedGenerator", strategy = "com.dragonfly.timemachine.util.jpa.UuidOrAssignedGenerator", parameters = { @Parameter(name = "strategy", value = "uuid2") })
-	//@GeneratedValue(strategy=GenerationType.AUTO)
     private String id;
     
     

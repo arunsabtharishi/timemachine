@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AbstractAuditableEntity {
+public abstract class AuditableModel {
 	
 	
     @Column(name = "CREATED_BY", updatable = false, nullable = false)
@@ -30,7 +30,6 @@ public abstract class AbstractAuditableEntity {
     @Column(name = "CREATED_DATE", updatable = false)
     @CreatedDate
     private DateTime createdDate;
-    
     
     @Column(name = "UPDATED_BY")
     @Size(min = 1, max = 255)

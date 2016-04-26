@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "CONTENTS")
-public class Contents extends AbstractVersionedEntity {
+public class Contents extends Model {
 
 	@Column(name = "USER_NAME")
     String userName;
