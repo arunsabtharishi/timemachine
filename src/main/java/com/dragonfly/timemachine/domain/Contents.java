@@ -24,5 +24,4 @@ public class Contents extends Model {
     @Column(name = "CONTENT_DATE")
     Date contentDate;
 
-
 }
