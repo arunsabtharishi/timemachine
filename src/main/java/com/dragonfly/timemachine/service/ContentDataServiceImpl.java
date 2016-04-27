@@ -1,13 +1,16 @@
 package com.dragonfly.timemachine.service;
 
-import java.sql.Date;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dragonfly.timemachine.contents.InsertContentsRequest;
+import com.dragonfly.timemachine.contents.UpdateContentsRequest;
 import com.dragonfly.timemachine.domain.Contents;
 import com.dragonfly.timemachine.repository.ContentsJpaRepository;
 
@@ -22,18 +25,16 @@ public class ContentDataServiceImpl implements ContentsDataService {
         Contents contents = new Contents();
 
         String contentsFromRequest = insertContentsRequest.getContents();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-
+        SimpleDateFormat sdf = new SimpleDateFormat("Rayyyy-mm-dd hh:mm:ss");
         java.sql.Date contentDate = null;
 
         if(null == insertContentsRequest.getContentDate()) {
-            contentDate = new Date(System.currentTimeMillis());
+            contentDate = new java.sql.Date(System.currentTimeMillis());
         }
         else {
             try {
-                contentDate  = (Date) sdf.parse(insertContentsRequest.getContentDate());
+                contentDate  = (java.sql.Date) sdf.parse(insertContentsRequest.getContentDate());
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -44,5 +45,26 @@ public class ContentDataServiceImpl implements ContentsDataService {
         contents.setUserName(userName);
 
         contentsRepository.save(contents);
+    }
+
+    @Transactional
+    @Override
+    public void updateContents(UpdateContentsRequest updatedContents, String id) {
+        String updateContent= updatedContents.getUpdatedContents();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        Date updateContentDate = null;
+        try {
+            updateContentDate = updatedContents.getUpdatedContentDate()!=null ? (java.sql.Date) sdf.parse(updatedContents.getUpdatedContentDate()) : null;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(null != updateContent || null != updateContentDate) {
+            Contents contents = contentsRepository.findOne(id);
+            updateContent = (updateContent==null) ? contents.getContent() : updateContent;
+            contents.setContent(updateContent);
+            updateContentDate = (updateContentDate==null) ? contents.getContentDate() : updateContentDate;
+            contents.setContentDate(updateContentDate);
+            contentsRepository.save(contents);
+        }
     }
 }
