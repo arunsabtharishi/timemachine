@@ -1,10 +1,12 @@
 package com.dragonfly.timemachine.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,13 +17,14 @@ import lombok.Setter;
 @Table(name = "CONTENTS")
 public class Contents extends Model {
 
-	@Column(name = "USER_NAME")
+    @Column(name = "USER_NAME")
     String userName;
 
     @Column(name = "CONTENT")
     String content;
 
     @Column(name = "CONTENT_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     Date contentDate;
 
 }

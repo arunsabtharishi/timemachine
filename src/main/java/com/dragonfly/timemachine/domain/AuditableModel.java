@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -22,6 +25,9 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditableModel {
 
+    @Version
+    @Column(name = "VERSION")
+    private Integer version;
 
     @Column(name = "CREATED_BY", updatable = false)
     @Size(min = 1, max = 255)
@@ -29,6 +35,7 @@ public abstract class AuditableModel {
     private String createdBy;
 
     @Column(name = "CREATED_DATE", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdDate = new Date();
 
@@ -38,6 +45,7 @@ public abstract class AuditableModel {
     private String lastModifiedBy;
 
     @Column(name = "UPDATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date lastModifiedDate;
 
