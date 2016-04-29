@@ -4,12 +4,14 @@ package com.dragonfly.timemachine.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dragonfly.timemachine.contents.InsertContentsRequest;
+import com.dragonfly.timemachine.contents.ReadRequest;
 import com.dragonfly.timemachine.contents.UpdateContentsRequest;
 import com.dragonfly.timemachine.domain.Contents;
 import com.dragonfly.timemachine.repository.ContentsJpaRepository;
@@ -19,9 +21,9 @@ public class ContentDataServiceImpl implements ContentsDataService {
 
     @Autowired
     private ContentsJpaRepository contentsRepository;
-
+    
     @Override
-    public void insertContents(InsertContentsRequest insertContentsRequest) {
+    public void createContents(InsertContentsRequest insertContentsRequest) {
         Contents contents = new Contents();
 
         String contentsFromRequest = insertContentsRequest.getContents();
@@ -46,6 +48,21 @@ public class ContentDataServiceImpl implements ContentsDataService {
 
         contentsRepository.save(contents);
     }
+    
+    @Override
+    public List<Contents> readContents(ReadRequest readRequest){
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    	List<Contents> contents = null;
+    	try {
+			contents =  contentsRepository.findByContentDate
+					(formatter.parse(readRequest.getContentDate()), readRequest.getUserName());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	    	
+    	return contents;
+    }
+
 
     @Transactional
     @Override
@@ -67,4 +84,7 @@ public class ContentDataServiceImpl implements ContentsDataService {
             contentsRepository.saveAndFlush(contents);
         }
     }
+    
+    
+    
 }
