@@ -25,7 +25,7 @@ public class ContentDataServiceImpl implements ContentsDataService {
         Contents contents = new Contents();
 
         String contentsFromRequest = insertContentsRequest.getContents();
-        SimpleDateFormat sdf = new SimpleDateFormat("Rayyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         java.sql.Date contentDate = null;
 
         if(null == insertContentsRequest.getContentDate()) {
@@ -64,7 +64,7 @@ public class ContentDataServiceImpl implements ContentsDataService {
             contents.setContent(updateContent);
             updateContentDate = (updateContentDate==null) ? contents.getContentDate() : updateContentDate;
             contents.setContentDate(updateContentDate);
-            contentsRepository.save(contents);
+            contentsRepository.saveAndFlush(contents);
         }
     }
 }
