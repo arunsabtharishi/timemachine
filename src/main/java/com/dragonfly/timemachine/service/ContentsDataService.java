@@ -14,5 +14,5 @@ public interface ContentsDataService {
 
     void updateContents(UpdateContentsRequest updatedContents, String id);
     
-    void deleteContents(List<String> id);
+    void deleteContents(List<String> ids);
 }
