@@ -91,6 +91,12 @@ public class ContentDataServiceImpl implements ContentsDataService {
             contentsRepository.saveAndFlush(contents);
         }
     }
+
+	@Override
+	public void deleteContents(List<String> ids) {
+		List<Contents> contents = (List<Contents>) contentsRepository.findAll(ids);
+		contentsRepository.delete(contents);
+	}
     
     
     

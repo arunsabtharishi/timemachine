@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dragonfly.timemachine.contents.DeleteContentsRequest;
 import com.dragonfly.timemachine.contents.InsertContentsRequest;
 import com.dragonfly.timemachine.contents.ReadRequest;
 import com.dragonfly.timemachine.contents.UpdateContentsRequest;
@@ -39,6 +40,12 @@ public class ContentsController {
     @ResponseBody
     public void updateContents(@PathVariable String id, @RequestBody UpdateContentsRequest updateContentsRequest) {
         contentsDataService.updateContents(updateContentsRequest, id);
+    }
+    
+    @RequestMapping(value = "/deleteContents", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteContents(@RequestBody DeleteContentsRequest deleteContentsRequest) {
+        contentsDataService.deleteContents(deleteContentsRequest.getIds());
     }
 
 }

@@ -13,4 +13,6 @@ public interface ContentsDataService {
     List<Contents> readContents(ReadRequest readRequest);
 
     void updateContents(UpdateContentsRequest updatedContents, String id);
+    
+    void deleteContents(List<String> id);
 }
