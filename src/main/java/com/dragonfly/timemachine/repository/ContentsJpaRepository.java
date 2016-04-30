@@ -12,6 +12,6 @@ import com.dragonfly.timemachine.domain.Contents;
 @Repository
 public interface ContentsJpaRepository extends JpaRepository<Contents, String> {
 
-	  @Query("select c.content, c.contentDate from Contents c where c.contentDate = ?1 and c.userName = ?2")
-	  List<Contents> findByContentDate(Date contentDate, String userName);
+	  @Query("select c.content, c.contentDate from Contents c where c.contentDate >= ?1 and c.contentDate < ?2 and c.userName = ?3")
+	  List<Contents> findByContentDate(Date contentDate1, Date contentDate2, String userName);
 }

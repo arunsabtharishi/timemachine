@@ -3,6 +3,7 @@ package com.dragonfly.timemachine.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -54,10 +55,16 @@ public class ContentDataServiceImpl implements ContentsDataService {
     	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     	List<Contents> contents = null;
     	try {
-			contents =  contentsRepository.findByContentDate
-					(formatter.parse(readRequest.getContentDate()), readRequest.getUserName());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+    		Calendar c = Calendar.getInstance();
+    		Date contentDate1 = formatter.parse(readRequest.getContentDate());
+    		
+    		c.setTime(contentDate1);
+    		c.add(Calendar.DATE, 1);  // number of days to add
+    		String date = formatter.format(c.getTime());
+    		Date contentDate2 = formatter.parse(date);
+			contents =  (List<Contents>)contentsRepository.findByContentDate
+					(contentDate1, contentDate2, readRequest.getUserName());
+		} catch (ParseException e) {		
 			e.printStackTrace();
 		}    	    	
     	return contents;
