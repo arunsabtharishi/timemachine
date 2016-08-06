@@ -1,9 +1,14 @@
 package com.dragonfly.timemachine.contents;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 
 @Getter
 public class ReadRequest {	
-	String contentDate;	
+	@NotNull
+	String contentDate;
+	
+	@NotNull
 	String userName;
 }
